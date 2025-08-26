@@ -7,7 +7,7 @@ from app.main import check_password
     [
         "Pass@word1",
         "A1$bcdefg",
-        "A1$bcdefghijklmno",
+        "A1$bcdefghijklmn",
         "Valid#123",
     ],
 )
