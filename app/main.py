@@ -6,9 +6,7 @@ def check_password(password: str) -> bool:
         return False
 
     allowed_specials = "$@#&!-_;"
-    allowed_chars = set(
-        string.ascii_letters + string.digits + allowed_specials
-    )
+    allowed_chars = set(string.ascii_letters + string.digits + allowed_specials)
 
     for char in password:
         if char not in allowed_chars:
