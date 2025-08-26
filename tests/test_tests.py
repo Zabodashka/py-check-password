@@ -5,7 +5,7 @@ from app.main import check_password
 @pytest.mark.parametrize("password", [
     "Pass@word1",
     "A1$bcdefg",
-    "A1$bcdefghijklmno",
+    "A1$bcdefghijklmn",
     "Valid#123"
 ])
 def test_valid_passwords(password):
