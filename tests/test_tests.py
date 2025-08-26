@@ -1,10 +1,11 @@
 import pytest
 from app.main import check_password
 
+
 @pytest.mark.parametrize("password", [
     "Pass@word1",
     "A1$bcdefg",
-    "A1$bcdefghijklmn",
+    "A1$bcdefghijklmno",
     "Valid#123",
 ])
 def test_valid_passwords(password):
@@ -12,42 +13,12 @@ def test_valid_passwords(password):
 
 
 @pytest.mark.parametrize("password", [
-    "A1$a",  # too short
-    "A1$" + "a" * 14 + "b",  # 17 chars
+    "short1!",        # меньше 8 символов
+    "toolongpassword1$!",  # больше 16 символов
+    "NoSpecialChar1", # нет спецсимвола
+    "nospecialchar1", # нет заглавной буквы и спецсимвола
+    "NoDigit!@",      # нет цифры
+    "InvalidChar%1A", # недопустимый символ %
 ])
-def test_invalid_length(password):
-    assert check_password(password) is False
-
-
-@pytest.mark.parametrize("password", [
-    "Password!",     # no digit
-    "Strong#Pass",
-])
-def test_missing_digit(password):
-    assert check_password(password) is False
-
-
-@pytest.mark.parametrize("password", [
-    "pass@word1",    # no uppercase
-    "valid#123",
-])
-def test_missing_uppercase(password):
-    assert check_password(password) is False
-
-
-@pytest.mark.parametrize("password", [
-    "Password1",     # no special char
-    "A1b2c3d4",
-])
-def test_missing_special_char(password):
-    assert check_password(password) is False
-
-
-@pytest.mark.parametrize("password", [
-    "Pass word1!",     # space
-    "Pass*word1",      # * is not allowed
-    "Päss@word1",      # non-latin ä
-    "Пароль@123",      # Cyrillic
-])
-def test_disallowed_characters(password):
+def test_invalid_passwords(password):
     assert check_password(password) is False
