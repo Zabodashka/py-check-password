@@ -5,7 +5,7 @@ def check_password(password: str) -> bool:
     if not (8 <= len(password) <= 16):
         return False
 
-    allowed_specials = "$@#&!-_"
+    allowed_specials = "$@#&!-_;"
     allowed_chars = set(
         string.ascii_letters + string.digits + allowed_specials
     )
