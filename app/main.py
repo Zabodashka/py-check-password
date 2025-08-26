@@ -10,16 +10,14 @@ def check_password(password: str) -> bool:
         string.ascii_letters + string.digits + allowed_specials
     )
 
-    if not all(c in allowed_chars for c in password):
-        return False
+    # Проверка на допустимые символы
+    for c in password:
+        if c not in allowed_chars:
+            return False
 
-    if not any(c.isupper() for c in password):
-        return False
+    # Проверка на наличие хотя бы одного символа каждого типа
+    has_upper = any(c.isupper() for c in password)
+    has_digit = any(c.isdigit() for c in password)
+    has_special = any(c in allowed_specials for c in password)
 
-    if not any(c.isdigit() for c in password):
-        return False
-
-    if not any(c in allowed_specials for c in password):
-        return False
-
-    return True
+    return has_upper and has_digit and has_special
